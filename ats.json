@@ -1,0 +1,126 @@
+{
+	"name": "Applied Type System",
+	"scopeName": "source.ats",
+	"fileTypes": ["dats", "sats", "hats"],
+	"uuid": "c3b7ee53-6117-4cdf-80ea-d0572e54aed7",
+	"repository": {
+		"string": {
+			"name": "string.double-quote.ats",
+			"match": "\".*\""
+		},
+		"comment_block": {
+			"name": "comment.block.ats",
+			"applyEndPatternLast": 1,
+			"begin": "\\(\\*",
+			"end": "\\*\\)",
+			"patterns": [
+				{"include": "#comment_block"}
+			]
+		},
+		"comment_line": {
+			"name": "comment.line.ats",
+			"patterns": [
+				{
+					"name": "comment.line.double-slash.ats",
+					"match": "//.*$"
+				}
+			]
+		},
+		"comment_rest": {
+			"name": "comment.rest.ats",
+			"applyEndPatternLast": 1,
+			"begin": "////",
+			"end": ".\\z",
+			"patterns": [
+				{
+					"name": "comment.block.ats",
+					"match": ".*"
+				}
+			]
+		},
+		// "type_base": {
+		// 	"name": "storage.type.base.ats",
+		// 	"match": "\\s+(int|void|double|bool|ptr)\\s*"
+		// },
+		"quantifier_square": {
+			"begin": "(\\[)",
+			"end": "(\\])",
+			"name": "variable.parameter.ats"
+		},
+		"quantifier_curly": {
+			"begin": "({)",
+			"end": "(})",
+			"name": "variable.parameter.ats"
+		},
+		"quantifier_arrow": {
+			"begin": "(<)",
+			"end": "(>)",
+			"name": "variable.parameter.ats"
+		},
+		/*"quantifier_paran": {
+			"applyEndPatternLast": 1,
+			"begin": "\\(",
+			"end": "\\)",
+			"name": "entity.name.function"
+		},*/
+		"operators": {
+			"name": "keyword.operator.ats",
+			"match": "(\\!|&|\\?|==>|=>|=|\\->|\\-\\->|\\<|\\>|:=|\\+|\\-|\\*|/|\\~|\\||\\$)"
+		},
+		"special": {
+			"name": "keyword.other.special.ats",
+			"match": "(#|\\$)(\\w*)\\b"
+		}
+	},
+	"patterns": [
+		{"include": "#comment_rest"},
+		{"include": "#comment_line"},
+		{"include": "#comment_block"},
+		{"include": "#string"},
+		// {"include": "#type_base"},
+		{"include": "#quantifier_square"},
+		{"include": "#quantifier_arrow"},
+		{"include": "#quantifier_curly"},
+		// {"include": "#quantifier_paran"},
+		{"include": "#special"},
+		{"include": "#operators"},
+		{
+			"name": "keyword.other.ats",
+			"match": "\\b(extern|symintr|overload|exception)\\b"
+		},
+		{
+			"name": "keyword.other.load.ats",
+			"match": "\\b(staload|dynload)\\b"
+		},
+		{
+			"name": "keyword.other.fun.ats",
+			"match": "\\b(fun|fn|prfun|prfn|implement|fnx|castfn|praxi)\\b"
+		},
+		{
+			"name": "keyword.other.val.ats",
+			"match": "\\b(val|prval)\\b"
+		},
+		{
+			"name": "keyword.other.abstype.ats",
+			"match": "\\b(abstype|abst@ype|absprop|absview|absvtype|absviewtype|absviewt@ype|absvt@ype)\\b"
+		},
+		{
+			"name": "keyword.other.datatype.ats",
+			"match": "\\b(datatype|dataprop|dataview|dataviewtype|datavtype)\\b"
+		},
+		{
+			"name": "keyword.other.typedef.ats",
+			"match": "\\b(stadef|sortdef|typedef|propdef|viewdef|viewtypedef|vtypedef)\\b"
+		},
+		// {
+		// 	"name": "keyword.other.type.ats",
+		// 	"match": "\\b(type|t@ype|prop|view|view@|viewtype|viewt@ype|vtype|vt@ype)\\b"
+		// },
+		{
+			"name": "keyword.other.long.ats",
+			"match": "\\b(let|of|with|in|end|and|where|if|then|else|case|local)\\b"
+		}
+	]
+}
+
+

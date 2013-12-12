@@ -1,12 +1,12 @@
 {
-	"name": "Applied Type System",
+	"name": "ATS",
 	"scopeName": "source.ats",
 	"fileTypes": ["dats", "sats", "hats"],
 	"uuid": "c3b7ee53-6117-4cdf-80ea-d0572e54aed7",
 	"repository": {
 		"string": {
 			"name": "string.double-quote.ats",
-			"match": "\".*\""
+			"match": "\"[^\"]*\""
 		},
 		"comment_block": {
 			"name": "comment.block.ats",
@@ -70,6 +70,13 @@
 		"special": {
 			"name": "keyword.other.special.ats",
 			"match": "(#|\\$)(\\w*)\\b"
+		}, 
+		"where": {
+			"applyEndPatternLast": 1,
+			"begin": "(where)(\\s)*({)",
+			"beginCaptures": {"1": {"name": "keyword.ats"}},
+			"end": "(})",
+			"patterns": [{"include": "$self"}]
 		}
 	},
 	"patterns": [
@@ -78,6 +85,7 @@
 		{"include": "#comment_block"},
 		{"include": "#string"},
 		// {"include": "#type_base"},
+		{"include": "#where"},
 		{"include": "#quantifier_square"},
 		{"include": "#quantifier_arrow"},
 		{"include": "#quantifier_curly"},
@@ -102,7 +110,7 @@
 		},
 		{
 			"name": "keyword.other.abstype.ats",
-			"match": "\\b(abstype|abst@ype|absprop|absview|absvtype|absviewtype|absviewt@ype|absvt@ype)\\b"
+			"match": "\\b(assume|abstype|abst@ype|absprop|absview|absvtype|absviewtype|absviewt@ype|absvt@ype)\\b"
 		},
 		{
 			"name": "keyword.other.datatype.ats",

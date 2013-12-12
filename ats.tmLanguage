@@ -9,7 +9,7 @@
 		<string>hats</string>
 	</array>
 	<key>name</key>
-	<string>Applied Type System</string>
+	<string>ATS</string>
 	<key>patterns</key>
 	<array>
 		<dict>
@@ -27,6 +27,10 @@
 		<dict>
 			<key>include</key>
 			<string>#string</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#where</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -74,7 +78,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(abstype|abst@ype|absprop|absview|absvtype|absviewtype|absviewt@ype|absvt@ype)\b</string>
+			<string>\b(assume|abstype|abst@ype|absprop|absview|absvtype|absviewtype|absviewt@ype|absvt@ype)\b</string>
 			<key>name</key>
 			<string>keyword.other.abstype.ats</string>
 		</dict>
@@ -195,9 +199,33 @@
 		<key>string</key>
 		<dict>
 			<key>match</key>
-			<string>".*"</string>
+			<string>"[^"]*"</string>
 			<key>name</key>
 			<string>string.double-quote.ats</string>
+		</dict>
+		<key>where</key>
+		<dict>
+			<key>applyEndPatternLast</key>
+			<integer>1</integer>
+			<key>begin</key>
+			<string>(where)(\s)*({)</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.ats</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>(})</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
+			</array>
 		</dict>
 	</dict>
 	<key>scopeName</key>

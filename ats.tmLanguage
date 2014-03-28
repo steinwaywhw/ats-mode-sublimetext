@@ -14,6 +14,10 @@
 	<array>
 		<dict>
 			<key>include</key>
+			<string>#where</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#comment_rest</string>
 		</dict>
 		<dict>
@@ -30,15 +34,7 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#where</string>
-		</dict>
-		<dict>
-			<key>include</key>
 			<string>#quantifier_square</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#quantifier_arrow</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -46,59 +42,15 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#special</string>
-		</dict>
-		<dict>
-			<key>include</key>
 			<string>#operators</string>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>\b(extern|symintr|overload|exception)\b</string>
-			<key>name</key>
-			<string>keyword.other.ats</string>
+			<key>include</key>
+			<string>#quantifier_arrow</string>
 		</dict>
 		<dict>
-			<key>match</key>
-			<string>\b(staload|dynload)\b</string>
-			<key>name</key>
-			<string>keyword.other.load.ats</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(fun|fn|prfun|prfn|implement|fnx|castfn|praxi)\b</string>
-			<key>name</key>
-			<string>keyword.other.fun.ats</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(val|prval)\b</string>
-			<key>name</key>
-			<string>keyword.other.val.ats</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(assume|abstype|abst@ype|absprop|absview|absvtype|absviewtype|absviewt@ype|absvt@ype)\b</string>
-			<key>name</key>
-			<string>keyword.other.abstype.ats</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(datatype|dataprop|dataview|dataviewtype|datavtype)\b</string>
-			<key>name</key>
-			<string>keyword.other.datatype.ats</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(stadef|sortdef|typedef|propdef|viewdef|viewtypedef|vtypedef)\b</string>
-			<key>name</key>
-			<string>keyword.other.typedef.ats</string>
-		</dict>
-		<dict>
-			<key>match</key>
-			<string>\b(let|of|with|in|end|and|where|if|then|else|case|local)\b</string>
-			<key>name</key>
-			<string>keyword.other.long.ats</string>
+			<key>include</key>
+			<string>#keywords</string>
 		</dict>
 	</array>
 	<key>repository</key>
@@ -123,17 +75,10 @@
 		</dict>
 		<key>comment_line</key>
 		<dict>
+			<key>match</key>
+			<string>//.*$</string>
 			<key>name</key>
 			<string>comment.line.ats</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>match</key>
-					<string>//.*$</string>
-					<key>name</key>
-					<string>comment.line.double-slash.ats</string>
-				</dict>
-			</array>
 		</dict>
 		<key>comment_rest</key>
 		<dict>
@@ -150,24 +95,29 @@
 				<dict>
 					<key>match</key>
 					<string>.*</string>
-					<key>name</key>
-					<string>comment.block.ats</string>
 				</dict>
 			</array>
+		</dict>
+		<key>keywords</key>
+		<dict>
+			<key>match</key>
+			<string>(\#|\$)(\w+)|\b(absprop|abst@ype|abstype|absviewt@ype|absviewtype|absview|and|andalso|assume|as|begin|break|case(\+|-)?|class|continue|dataprop|datasort|datatype|dataviewtype|dataview|dynload|dyn|else|end|exception|extern|fix|fn|for|fun|if|implement|infixl|infixr|infix|in|lam|let|llam|local|macdef|macrodef|method|modprop|modtype|module|nonfix|object|of|op|or|orelse|overload|par|postfix|praxi|prefix|prfn|prfun|propdef|prval|rec|sif|sortdef|stadef|staif|staload|stavar|sta|struct|symelim|symintr|then|try|typedef|union|val(\+|-)?|var|viewdef|viewtypedef|when|where|while|withprop|withtype|withviewtype|withview|with)\b</string>
+			<key>name</key>
+			<string>keyword.ats</string>
 		</dict>
 		<key>operators</key>
 		<dict>
 			<key>match</key>
-			<string>(\!|&amp;|\?|==&gt;|=&gt;|=|\-&gt;|\-\-&gt;|\&lt;|\&gt;|:=|\+|\-|\*|/|\~|\||\$)</string>
+			<string>!=|!|%|&amp;&amp;|&amp;|\*|\+|-|--&gt;|-&gt;|/|:=|&lt;=|(?&lt;=\s)&lt;|==&gt;|=&gt;|=|&gt;=|&gt;&gt;|&gt;|\?|\|\||\||~</string>
 			<key>name</key>
 			<string>keyword.operator.ats</string>
 		</dict>
 		<key>quantifier_arrow</key>
 		<dict>
 			<key>begin</key>
-			<string>(&lt;)</string>
+			<string>(?&lt;!\s)&lt;</string>
 			<key>end</key>
-			<string>(&gt;)</string>
+			<string>&gt;</string>
 			<key>name</key>
 			<string>variable.parameter.ats</string>
 		</dict>
@@ -189,36 +139,21 @@
 			<key>name</key>
 			<string>variable.parameter.ats</string>
 		</dict>
-		<key>special</key>
-		<dict>
-			<key>match</key>
-			<string>(#|\$)(\w*)\b</string>
-			<key>name</key>
-			<string>keyword.other.special.ats</string>
-		</dict>
 		<key>string</key>
 		<dict>
 			<key>match</key>
 			<string>"[^"]*"</string>
 			<key>name</key>
-			<string>string.double-quote.ats</string>
+			<string>string.ats</string>
 		</dict>
 		<key>where</key>
 		<dict>
 			<key>applyEndPatternLast</key>
 			<integer>1</integer>
 			<key>begin</key>
-			<string>(where)(\s)*({)</string>
-			<key>beginCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>keyword.ats</string>
-				</dict>
-			</dict>
+			<string>(?&lt;=where)(?:\s*){</string>
 			<key>end</key>
-			<string>(})</string>
+			<string>}</string>
 			<key>patterns</key>
 			<array>
 				<dict>

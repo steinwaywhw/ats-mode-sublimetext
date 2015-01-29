@@ -64,6 +64,10 @@
 			<key>include</key>
 			<string>#keywords</string>
 		</dict>
+		<dict>
+			<key>include</key>
+			<string>#keywords_types</string>
+		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
@@ -138,14 +142,21 @@
 		<key>keywords</key>
 		<dict>
 			<key>match</key>
-			<string>(\#|\$)(\w+)|\b(castfn|absprop|abst@ype|abstype|absviewt@ype|absviewtype|absvtype|absview|and|andalso|assume|as|begin|break|case(\+|-)?|class|continue|dataprop|datasort|datatype|dataviewtype|dataview|dynload|dyn|else|end|exception|extern|fix|fn|for|fun|if|implement|infixl|infixr|infix|in|lam|let|llam|local|macdef|macrodef|method|modprop|modtype|module|nonfix|object|of|op|or|orelse|overload|par|postfix|praxi|prefix|prfn|prfun|propdef|prval|rec|sif|sortdef|stadef|staif|staload|stavar|sta|struct|symelim|symintr|then|try|typedef|union|val(\+|-)?|var|viewdef|viewtypedef|vtypedef|when|where|while|withprop|withtype|withviewtype|withview|with)\b</string>
+			<string>(\#|\$)(\w+)|\b(castfn|and|andalso|assume|as|begin|break|case(\+|-)?|class|continue|dynload|dyn|else|end|exception|extern|fix|fn|for|fun|if|implement|infixl|infixr|infix|in|lam|let|llam|local|macdef|macrodef|method|modprop|modtype|module|nonfix|object|of|op|or|orelse|overload|par|postfix|praxi|prefix|prfn|prfun|prval|rec|sif|staif|staload|stavar|sta|struct|symelim|symintr|then|try|union|val(\+|-)?|var|when|where|while|withprop|withtype|withviewtype|withview|with)\b</string>
+			<key>name</key>
+			<string>keyword</string>
+		</dict>
+		<key>keywords_types</key>
+		<dict>
+			<key>match</key>
+			<string>(\#|\$)(\w+)|\b(abstype|abst@ype|abst0pe|absvtype|absvt@ype|absvt0pe|absviewtype|absviewt@ype|absviewt0pe|absview|absprop|datatype|datavtype|dataviewtype|dataview|dataprop|datasort|sortdef|propdef|viewdef|viewtypedef|vtypedef|stadef|typedef|)\b</string>
 			<key>name</key>
 			<string>keyword</string>
 		</dict>
 		<key>number</key>
 		<dict>
 			<key>match</key>
-			<string>\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\b</string>
+			<string>\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|~)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\b</string>
 			<key>name</key>
 			<string>constant.numeric</string>
 		</dict>

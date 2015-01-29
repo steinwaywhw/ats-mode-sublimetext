@@ -11,3 +11,9 @@ Author: Hanwen Wu
 * Click `Preferences > Package Control > Install Package`
 * Type and search for `ATS Syntax Highlight`
 * Then restart SublimeText
+
+## Usage
+
+* `Ctrl + /` for line comments
+* `Ctrl + Shift + /` for block comments
+

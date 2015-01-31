@@ -14,7 +14,7 @@
 	<array>
 		<dict>
 			<key>include</key>
-			<string>#where</string>
+			<string>#block</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -71,6 +71,22 @@
 	</array>
 	<key>repository</key>
 	<dict>
+		<key>block</key>
+		<dict>
+			<key>applyEndPatternLast</key>
+			<integer>1</integer>
+			<key>begin</key>
+			<string>(?&lt;=where|=|^)(?:\s*){</string>
+			<key>end</key>
+			<string>}</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
+			</array>
+		</dict>
 		<key>char</key>
 		<dict>
 			<key>begin</key>
@@ -216,22 +232,6 @@
 			<string>\\(\\|[abefnprtv'"?]|[0-3]\d{,2}|[4-7]\d?|x[a-fA-F0-9]{,2}|u[a-fA-F0-9]{,4}|U[a-fA-F0-9]{,8})</string>
 			<key>name</key>
 			<string>constant.character.escape</string>
-		</dict>
-		<key>where</key>
-		<dict>
-			<key>applyEndPatternLast</key>
-			<integer>1</integer>
-			<key>begin</key>
-			<string>(?&lt;=where)(?:\s*){</string>
-			<key>end</key>
-			<string>}</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>$self</string>
-				</dict>
-			</array>
 		</dict>
 	</dict>
 	<key>scopeName</key>

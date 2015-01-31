@@ -5,7 +5,7 @@ fileTypes: [dats, sats, hats]
 uuid: c3b7ee53-6117-4cdf-80ea-d0572e54aed7
 
 patterns:
-- include: '#where'
+- include: '#block'
 
 - include: '#comment_rest'
 
@@ -109,8 +109,15 @@ repository:
     begin: (%{)
     end: (%})
 
-  where:
-    begin: (?<=where)(?:\s*){
+  # where:
+  #   begin: (?<=where)(?:(\s|\n|\r)*){
+  #   end: '}'
+  #   patterns:
+  #   - include: $self
+  #   applyEndPatternLast: 1
+
+  block:
+    begin: (?<=where|=|^)(?:\s*){
     end: '}'
     patterns:
     - include: $self

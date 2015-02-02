@@ -7,17 +7,15 @@ uuid: c3b7ee53-6117-4cdf-80ea-d0572e54aed7
 patterns:
 - include: '#block'
 
+- include: '#records'
+
+- include: '#tuples'
+
 - include: '#comment_rest'
 
 - include: '#comment_line'
 
 - include: '#comment_block'
-
-- include: '#string'
-
-- include: '#char'
-
-- include: '#number'
 
 - include: '#embed'
 
@@ -32,6 +30,12 @@ patterns:
 - include: '#keywords'
 
 - include: '#keywords_types'
+
+- include: '#string'
+
+- include: '#char'
+
+- include: '#number'
 
 
 repository:
@@ -53,6 +57,22 @@ repository:
     end: .\z
     patterns:
     - match: .*
+    applyEndPatternLast: 1
+
+  records:
+    # name: keyword.operator
+    begin: ('{|@{)
+    end: (})
+    patterns:
+    - include: $self
+    applyEndPatternLast: 1
+
+  tuples:
+    # name: keyword.operator
+    begin: ('\(|@\()
+    end: (\))
+    patterns:
+    - include: $self
     applyEndPatternLast: 1
 
   keywords:

@@ -18,6 +18,14 @@
 		</dict>
 		<dict>
 			<key>include</key>
+			<string>#records</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#tuples</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#comment_rest</string>
 		</dict>
 		<dict>
@@ -27,18 +35,6 @@
 		<dict>
 			<key>include</key>
 			<string>#comment_block</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#string</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#char</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#number</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -67,6 +63,18 @@
 		<dict>
 			<key>include</key>
 			<string>#keywords_types</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#string</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#char</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#number</string>
 		</dict>
 	</array>
 	<key>repository</key>
@@ -210,6 +218,22 @@
 			<key>name</key>
 			<string>support.type</string>
 		</dict>
+		<key>records</key>
+		<dict>
+			<key>applyEndPatternLast</key>
+			<integer>1</integer>
+			<key>begin</key>
+			<string>('{|@{)</string>
+			<key>end</key>
+			<string>(})</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
+			</array>
+		</dict>
 		<key>string</key>
 		<dict>
 			<key>begin</key>
@@ -232,6 +256,22 @@
 			<string>\\(\\|[abefnprtv'"?]|[0-3]\d{,2}|[4-7]\d?|x[a-fA-F0-9]{,2}|u[a-fA-F0-9]{,4}|U[a-fA-F0-9]{,8})</string>
 			<key>name</key>
 			<string>constant.character.escape</string>
+		</dict>
+		<key>tuples</key>
+		<dict>
+			<key>applyEndPatternLast</key>
+			<integer>1</integer>
+			<key>begin</key>
+			<string>('\(|@\()</string>
+			<key>end</key>
+			<string>(\))</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
+			</array>
 		</dict>
 	</dict>
 	<key>scopeName</key>

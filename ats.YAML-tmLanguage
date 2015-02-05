@@ -7,10 +7,6 @@ uuid: c3b7ee53-6117-4cdf-80ea-d0572e54aed7
 patterns:
 - include: '#block'
 
-- include: '#records'
-
-- include: '#tuples'
-
 - include: '#comment_rest'
 
 - include: '#comment_line'
@@ -34,6 +30,10 @@ patterns:
 - include: '#string'
 
 - include: '#char'
+
+- include: '#records'
+
+- include: '#tuples'
 
 - include: '#number'
 
@@ -65,7 +65,7 @@ repository:
     end: (})
     patterns:
     - include: $self
-    applyEndPatternLast: 1
+    # applyEndPatternLast: 1
 
   tuples:
     # name: keyword.operator
@@ -73,7 +73,7 @@ repository:
     end: (\))
     patterns:
     - include: $self
-    applyEndPatternLast: 1
+    # applyEndPatternLast: 1
 
   keywords:
     name: keyword
@@ -118,12 +118,9 @@ repository:
     match: \\(\\|[abefnprtv'"?]|[0-3]\d{,2}|[4-7]\d?|x[a-fA-F0-9]{,2}|u[a-fA-F0-9]{,4}|U[a-fA-F0-9]{,8})
 
   char:
-    name: string.quoted.single
-    begin: (')
-    end: (')
-    patterns:
-    - include: '#string_escaped'
-
+    name: string.quoted.double
+    match: (')([^\\]{,1}|\\(\\|[abefpnrtv'"?]|[0-3]\d{,2}|[4-7]\d?|x[a-fA-F0-9]{,2}|u[a-fA-F0-9]{,4}|U[a-fA-F0-9]{,8}))(')
+    
   embed:
     name: meta
     begin: (%{)

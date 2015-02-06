@@ -61,7 +61,7 @@ repository:
 
   records:
     # name: keyword.operator
-    begin: ('{|@{)
+    begin: ('|@)({)
     end: (})
     patterns:
     - include: $self
@@ -69,7 +69,7 @@ repository:
 
   tuples:
     # name: keyword.operator
-    begin: ('\(|@\()
+    begin: ('|@)\(
     end: (\))
     patterns:
     - include: $self
@@ -134,7 +134,7 @@ repository:
   #   applyEndPatternLast: 1
 
   block:
-    begin: (?<=where|=|^)(?:\s*){
+    begin: (?<=where|=|^|then|else|\$rec|\$rec_t|\$rec_vt)(?:\s*){
     end: '}'
     patterns:
     - include: $self

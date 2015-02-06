@@ -84,7 +84,7 @@
 			<key>applyEndPatternLast</key>
 			<integer>1</integer>
 			<key>begin</key>
-			<string>(?&lt;=where|=|^)(?:\s*){</string>
+			<string>(?&lt;=where|=|^|then|else|\$rec|\$rec_t|\$rec_vt)(?:\s*){</string>
 			<key>end</key>
 			<string>}</string>
 			<key>patterns</key>
@@ -212,7 +212,7 @@
 		<key>records</key>
 		<dict>
 			<key>begin</key>
-			<string>('{|@{)</string>
+			<string>('|@)({)</string>
 			<key>end</key>
 			<string>(})</string>
 			<key>patterns</key>
@@ -249,7 +249,7 @@
 		<key>tuples</key>
 		<dict>
 			<key>begin</key>
-			<string>('\(|@\()</string>
+			<string>('|@)\(</string>
 			<key>end</key>
 			<string>(\))</string>
 			<key>patterns</key>

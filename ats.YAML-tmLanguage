@@ -23,6 +23,8 @@ patterns:
 
 - include: '#quantifier_arrow'
 
+- include: '#definition'
+
 - include: '#keywords'
 
 - include: '#keywords_types'
@@ -36,6 +38,8 @@ patterns:
 - include: '#tuples'
 
 - include: '#number'
+
+- include: '#identifier'
 
 
 repository:
@@ -120,11 +124,26 @@ repository:
   char:
     name: string.quoted.double
     match: (')([^\\]{0,1}|\\(\\|[abefpnrtv'"?]|[0-3]\d{0,2}|[4-7]\d?|x[a-fA-F0-9]{0,2}|u[a-fA-F0-9]{0,4}|U[a-fA-F0-9]{0,8}))(')
-    
+
   embed:
     name: meta
     begin: (%{)
     end: (%})
+
+  identifier:
+    name: identifier
+    match: \[a-zA-Z][a-zA-Z0-9_']*
+
+  definition:
+    begin: \b(?:(castfn|fn|fun|implement|implmnt|infixl|infixr|infix|overload|postfix|praxi|prfn|prfun|primplement|primplmnt|prval|val|var)\b|val[+|-])
+    end: \b[a-zA-Z][a-zA-Z0-9_']*\b
+    patterns:
+    - include: $self
+    beginCaptures:
+      '0': {name: keyword}
+    endCaptures:
+      '0': {name: entity.name.function}
+
 
   # where:
   #   begin: (?<=where)(?:(\s|\n|\r)*){

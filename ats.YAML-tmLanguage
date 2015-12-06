@@ -41,8 +41,19 @@ patterns:
 
 - include: '#identifier'
 
-
 repository:
+
+  block:
+    begin: (?<=where|=|^|then|else|\$rec|\$rec_t|\$rec_vt)(?:\s*){
+    end: '}'
+    patterns:
+    - include: $self
+    applyEndPatternLast: 1
+
+  char:
+    name: string.quoted.double
+    match: (')([^\\]{0,1}|\\(\\|[abefpnrtv'"?]|[0-3]\d{0,2}|[4-7]\d?|x[a-fA-F0-9]{0,2}|u[a-fA-F0-9]{0,4}|U[a-fA-F0-9]{0,8}))(')
+
   comment_block:
     name: comment.block
     begin: \(\*
@@ -63,21 +74,24 @@ repository:
     - match: .*
     applyEndPatternLast: 1
 
-  records:
-    # name: keyword.operator
-    begin: ('|@)({)
-    end: (})
+  definition:
+    begin: \b(?:(castfn|fn|fun|implement|implmnt|infixl|infixr|infix|overload|postfix|praxi|prfn|prfun|primplement|primplmnt|prval|val|var)\b|val[+|-])
+    end: \b[a-zA-Z][a-zA-Z0-9_']*\b
     patterns:
     - include: $self
-    # applyEndPatternLast: 1
+    beginCaptures:
+      '0': {name: keyword}
+    endCaptures:
+      '0': {name: entity.name.function}
 
-  tuples:
-    # name: keyword.operator
-    begin: ('|@)\(
-    end: (\))
-    patterns:
-    - include: $self
-    # applyEndPatternLast: 1
+  embed:
+    name: meta
+    begin: (%{)
+    end: (%})
+
+  identifier:
+    name: identifier
+    match: \[a-zA-Z][a-zA-Z0-9_']*
 
   keywords:
     name: keyword
@@ -86,6 +100,10 @@ repository:
   keywords_types:
     name: keyword
     match:  (\#|\$)(\w+)|\b(abstype|abst@ype|abst0pe|absvtype|absvt@ype|absvt0pe|absviewtype|absviewt@ype|absviewt0pe|absview|absprop|datatype|datavtype|dataviewtype|dataview|dataprop|datasort|sortdef|propdef|viewdef|viewtypedef|vtypedef|stadef|typedef|)\b
+
+  number:
+    name: constant.numeric
+    match: \b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|~)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\b
 
   operators:
     name: keyword.operator
@@ -106,9 +124,13 @@ repository:
     begin: (\[)
     end: (\])
 
-  number:
-    name: constant.numeric
-    match: \b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|~)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\b
+  records:
+    # name: keyword.operator
+    begin: ('|@)({)
+    end: (})
+    patterns:
+    - include: $self
+    # applyEndPatternLast: 1
 
   string:
     name: string.quoted.double
@@ -121,29 +143,13 @@ repository:
     name: constant.character.escape
     match: \\(\\|[abefnprtv'"?]|[0-3]\d{0,2}|[4-7]\d?|x[a-fA-F0-9]{0,2}|u[a-fA-F0-9]{0,4}|U[a-fA-F0-9]{0,8})
 
-  char:
-    name: string.quoted.double
-    match: (')([^\\]{0,1}|\\(\\|[abefpnrtv'"?]|[0-3]\d{0,2}|[4-7]\d?|x[a-fA-F0-9]{0,2}|u[a-fA-F0-9]{0,4}|U[a-fA-F0-9]{0,8}))(')
-
-  embed:
-    name: meta
-    begin: (%{)
-    end: (%})
-
-  identifier:
-    name: identifier
-    match: \[a-zA-Z][a-zA-Z0-9_']*
-
-  definition:
-    begin: \b(?:(castfn|fn|fun|implement|implmnt|infixl|infixr|infix|overload|postfix|praxi|prfn|prfun|primplement|primplmnt|prval|val|var)\b|val[+|-])
-    end: \b[a-zA-Z][a-zA-Z0-9_']*\b
+  tuples:
+    # name: keyword.operator
+    begin: ('|@)\(
+    end: (\))
     patterns:
     - include: $self
-    beginCaptures:
-      '0': {name: keyword}
-    endCaptures:
-      '0': {name: entity.name.function}
-
+    # applyEndPatternLast: 1
 
   # where:
   #   begin: (?<=where)(?:(\s|\n|\r)*){
@@ -151,10 +157,3 @@ repository:
   #   patterns:
   #   - include: $self
   #   applyEndPatternLast: 1
-
-  block:
-    begin: (?<=where|=|^|then|else|\$rec|\$rec_t|\$rec_vt)(?:\s*){
-    end: '}'
-    patterns:
-    - include: $self
-    applyEndPatternLast: 1

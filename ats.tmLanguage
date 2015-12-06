@@ -50,7 +50,11 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#definition</string>
+			<string>#definition_function</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#definition_type</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -153,7 +157,7 @@
 				</dict>
 			</array>
 		</dict>
-		<key>definition</key>
+		<key>definition_function</key>
 		<dict>
 			<key>begin</key>
 			<string>\b(?:(castfn|fn|fun|implement|implmnt|infixl|infixr|infix|overload|postfix|praxi|prfn|prfun|primplement|primplmnt|prval|val|var)\b|val[+|-])</string>
@@ -183,6 +187,36 @@
 				</dict>
 			</array>
 		</dict>
+		<key>definition_type</key>
+		<dict>
+			<key>begin</key>
+			<string>\b(abstype|abst@ype|abst0pe|absvtype|absvt@ype|absvt0pe|absviewtype|absviewt@ype|absviewt0pe|absview|absprop|datatype|datavtype|dataviewtype|dataview|dataprop|datasort|sortdef|propdef|viewdef|viewtypedef|vtypedef|stadef|typedef)\b</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>keyword</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>\b[a-zA-Z][a-zA-Z0-9_']*\b</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.type storage.type</string>
+				</dict>
+			</dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
+			</array>
+		</dict>
 		<key>embed</key>
 		<dict>
 			<key>begin</key>
@@ -195,7 +229,7 @@
 		<key>identifier</key>
 		<dict>
 			<key>match</key>
-			<string>\[a-zA-Z][a-zA-Z0-9_']*</string>
+			<string>\b[a-zA-Z][a-zA-Z0-9_']*\b</string>
 			<key>name</key>
 			<string>identifier</string>
 		</dict>
@@ -209,7 +243,7 @@
 		<key>keywords_types</key>
 		<dict>
 			<key>match</key>
-			<string>(\#|\$)(\w+)|\b(abstype|abst@ype|abst0pe|absvtype|absvt@ype|absvt0pe|absviewtype|absviewt@ype|absviewt0pe|absview|absprop|datatype|datavtype|dataviewtype|dataview|dataprop|datasort|sortdef|propdef|viewdef|viewtypedef|vtypedef|stadef|typedef|)\b</string>
+			<string>(\#|\$)(\w+)|\b(abstype|abst@ype|abst0pe|absvtype|absvt@ype|absvt0pe|absviewtype|absviewt@ype|absviewt0pe|absview|absprop|datatype|datavtype|dataviewtype|dataview|dataprop|datasort|sortdef|propdef|viewdef|viewtypedef|vtypedef|stadef|typedef)\b</string>
 			<key>name</key>
 			<string>keyword</string>
 		</dict>

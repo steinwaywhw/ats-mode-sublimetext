@@ -50,6 +50,10 @@
 		</dict>
 		<dict>
 			<key>include</key>
+			<string>#definition</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#keywords</string>
 		</dict>
 		<dict>
@@ -75,6 +79,10 @@
 		<dict>
 			<key>include</key>
 			<string>#number</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#identifier</string>
 		</dict>
 	</array>
 	<key>repository</key>
@@ -145,6 +153,36 @@
 				</dict>
 			</array>
 		</dict>
+		<key>definition</key>
+		<dict>
+			<key>begin</key>
+			<string>\b(?:(castfn|fn|fun|implement|implmnt|infixl|infixr|infix|overload|postfix|praxi|prfn|prfun|primplement|primplmnt|prval|val|var)\b|val[+|-])</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>keyword</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>\b[a-zA-Z][a-zA-Z0-9_']*\b</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function</string>
+				</dict>
+			</dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
+			</array>
+		</dict>
 		<key>embed</key>
 		<dict>
 			<key>begin</key>
@@ -153,6 +191,13 @@
 			<string>(%})</string>
 			<key>name</key>
 			<string>meta</string>
+		</dict>
+		<key>identifier</key>
+		<dict>
+			<key>match</key>
+			<string>\[a-zA-Z][a-zA-Z0-9_']*</string>
+			<key>name</key>
+			<string>identifier</string>
 		</dict>
 		<key>keywords</key>
 		<dict>

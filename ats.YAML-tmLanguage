@@ -77,6 +77,7 @@ repository:
     applyEndPatternLast: 1
 
   definition_function:
+    name: meta.function-definition
     begin: \b(?:(castfn|fn|fun|implement|implmnt|infixl|infixr|infix|overload|postfix|praxi|prfn|prfun|primplement|primplmnt|prval|val|var)\b|val[+|-])
     end: \b[a-zA-Z][a-zA-Z0-9_']*\b
     patterns:
@@ -87,6 +88,7 @@ repository:
       '0': {name: entity.name.function}
 
   definition_type:
+    name: meta.type-definition
     begin: \b(abstype|abst@ype|abst0pe|absvtype|absvt@ype|absvt0pe|absviewtype|absviewt@ype|absviewt0pe|absview|absprop|datatype|datavtype|dataviewtype|dataview|dataprop|datasort|sortdef|propdef|viewdef|viewtypedef|vtypedef|stadef|typedef)\b
     end: \b[a-zA-Z][a-zA-Z0-9_']*\b
     patterns:

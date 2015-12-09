@@ -209,6 +209,8 @@
 					<string>entity.name.type storage.type</string>
 				</dict>
 			</dict>
+			<key>name</key>
+			<string>meta-type-definition</string>
 			<key>patterns</key>
 			<array>
 				<dict>

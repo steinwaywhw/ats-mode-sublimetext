@@ -62,8 +62,6 @@ repository:
     name: comment.block
     begin: /\*
     end: \*/
-    patterns:
-    - include: '#comment_block'
     applyEndPatternLast: 1
 
   comment_block_sml:
@@ -71,7 +69,7 @@ repository:
     begin: \(\*
     end: \*\)
     patterns:
-    - include: '#comment_block'
+    - include: '#comment_block_sml'
     applyEndPatternLast: 1
 
   comment_line:

@@ -175,7 +175,7 @@
 		<key>definition_function</key>
 		<dict>
 			<key>begin</key>
-			<string>\b(?:(castfn|fn|fun|implement|implmnt|infixl|infixr|infix|overload|postfix|praxi|prfn|prfun|primplement|primplmnt|prval|val|var)\b|val[+|-])</string>
+			<string>\b(?:castfn|fn|fun|implement|implmnt|infixl|infixr|infix|overload|postfix|praxi|prfn|prfun|primplement|primplmnt|var)\b</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>0</key>

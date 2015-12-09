@@ -86,7 +86,7 @@ repository:
 
   definition_function:
     name: meta.function-definition
-    begin: \b(?:(castfn|fn|fun|implement|implmnt|infixl|infixr|infix|overload|postfix|praxi|prfn|prfun|primplement|primplmnt|prval|val|var)\b|val[+|-])
+    begin: \b(?:castfn|fn|fun|implement|implmnt|infixl|infixr|infix|overload|postfix|praxi|prfn|prfun|primplement|primplmnt|var)\b
     end: \b[a-zA-Z][a-zA-Z0-9_']*\b
     patterns:
     - include: $self

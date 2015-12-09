@@ -26,7 +26,11 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#comment_block</string>
+			<string>#comment_block_c</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#comment_block_sml</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -114,7 +118,25 @@
 			<key>name</key>
 			<string>string.quoted.double</string>
 		</dict>
-		<key>comment_block</key>
+		<key>comment_block_c</key>
+		<dict>
+			<key>applyEndPatternLast</key>
+			<integer>1</integer>
+			<key>begin</key>
+			<string>/\*</string>
+			<key>end</key>
+			<string>\*/</string>
+			<key>name</key>
+			<string>comment.block</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#comment_block</string>
+				</dict>
+			</array>
+		</dict>
+		<key>comment_block_sml</key>
 		<dict>
 			<key>applyEndPatternLast</key>
 			<integer>1</integer>
@@ -148,7 +170,7 @@
 			<key>end</key>
 			<string>.\z</string>
 			<key>name</key>
-			<string>comment</string>
+			<string>comment.block</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -179,6 +201,8 @@
 					<string>entity.name.function</string>
 				</dict>
 			</dict>
+			<key>name</key>
+			<string>meta.function-definition</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -210,7 +234,7 @@
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta-type-definition</string>
+			<string>meta.type-definition</string>
 			<key>patterns</key>
 			<array>
 				<dict>

@@ -14,6 +14,14 @@
 	<array>
 		<dict>
 			<key>include</key>
+			<string>#quantifier_curly</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#quantifier_square</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#block</string>
 		</dict>
 		<dict>
@@ -26,7 +34,11 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#comment_block</string>
+			<string>#comment_block_c</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#comment_block_sml</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -38,15 +50,15 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#quantifier_curly</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#quantifier_square</string>
-		</dict>
-		<dict>
-			<key>include</key>
 			<string>#quantifier_arrow</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#definition_function</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#definition_type</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -55,6 +67,10 @@
 		<dict>
 			<key>include</key>
 			<string>#keywords_types</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#false_true</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -76,6 +92,10 @@
 			<key>include</key>
 			<string>#number</string>
 		</dict>
+		<dict>
+			<key>include</key>
+			<string>#identifier</string>
+		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
@@ -84,9 +104,11 @@
 			<key>applyEndPatternLast</key>
 			<integer>1</integer>
 			<key>begin</key>
-			<string>(?&lt;=where|=|^|then|else|\$rec|\$rec_t|\$rec_vt)(?:\s*){</string>
+			<string>(?&lt;=where|=|^|then|else|\$rec|\$rec_t|\$rec_vt)(?:\s*)\{</string>
 			<key>end</key>
-			<string>}</string>
+			<string>\}</string>
+			<key>name</key>
+			<string>meta.block</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -102,7 +124,18 @@
 			<key>name</key>
 			<string>string.quoted.double</string>
 		</dict>
-		<key>comment_block</key>
+		<key>comment_block_c</key>
+		<dict>
+			<key>applyEndPatternLast</key>
+			<integer>1</integer>
+			<key>begin</key>
+			<string>/\*</string>
+			<key>end</key>
+			<string>\*/</string>
+			<key>name</key>
+			<string>comment.block</string>
+		</dict>
+		<key>comment_block_sml</key>
 		<dict>
 			<key>applyEndPatternLast</key>
 			<integer>1</integer>
@@ -116,7 +149,7 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#comment_block</string>
+					<string>#comment_block_sml</string>
 				</dict>
 			</array>
 		</dict>
@@ -136,12 +169,76 @@
 			<key>end</key>
 			<string>.\z</string>
 			<key>name</key>
-			<string>comment</string>
+			<string>comment.block</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>match</key>
 					<string>.*</string>
+				</dict>
+			</array>
+		</dict>
+		<key>definition_function</key>
+		<dict>
+			<key>begin</key>
+			<string>\b(?:castfn|fn|fun|implement|implmnt|infixl|infixr|infix|overload|postfix|praxi|prfn|prfun|primplement|primplmnt|var)\b</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>keyword</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>\b[a-zA-Z][a-zA-Z0-9_']*\b</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.function-definition</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
+			</array>
+		</dict>
+		<key>definition_type</key>
+		<dict>
+			<key>begin</key>
+			<string>\b(abstype|abst@ype|abst0pe|absvtype|absvt@ype|absvt0pe|absviewtype|absviewt@ype|absviewt0pe|absview|absprop|datatype|datavtype|dataviewtype|dataview|dataprop|datasort|sortdef|propdef|viewdef|viewtypedef|vtypedef|stadef|typedef)\b</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>keyword</string>
+				</dict>
+			</dict>
+			<key>end</key>
+			<string>\b[a-zA-Z][a-zA-Z0-9_']*\b</string>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.type storage.type</string>
+				</dict>
+			</dict>
+			<key>name</key>
+			<string>meta.type-definition</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
 				</dict>
 			</array>
 		</dict>
@@ -154,17 +251,31 @@
 			<key>name</key>
 			<string>meta</string>
 		</dict>
+		<key>false_true</key>
+		<dict>
+			<key>match</key>
+			<string>\b(?:false|true)\b</string>
+			<key>name</key>
+			<string>constant.language.boolean</string>
+		</dict>
+		<key>identifier</key>
+		<dict>
+			<key>match</key>
+			<string>\b[a-zA-Z][a-zA-Z0-9_']*\b</string>
+			<key>name</key>
+			<string>identifier</string>
+		</dict>
 		<key>keywords</key>
 		<dict>
 			<key>match</key>
-			<string>(\#|\$)(\w+)|\b(castfn|and|andalso|assume|as|begin|break|case(\+|-)?|class|continue|dynload|dyn|else|end|exception|extern|fix|fn|for|fun|if|implement|implmnt|primplement|primplmnt|infixl|infixr|infix|in|lam|let|llam|local|macdef|macrodef|method|modprop|modtype|module|nonfix|object|of|op|or|orelse|overload|par|postfix|praxi|prefix|prfn|prfun|prval|rec|sif|staif|staload|stavar|sta|struct|symelim|symintr|then|try|union|val(\+|-)?|var|when|where|while|withprop|withtype|withviewtype|withview|with)\b</string>
+			<string>(\#|\$)(\w+)|\b(castfn|and|andalso|assume|as|begin|break|case(\+|-)?|class|continue|dynload|dyn|else|end|exception|extern|fix|fn|for|fun|if|implement|implmnt|primplement|primplmnt|infixl|infixr|infix|in|lam|let|llam|local|macdef|macrodef|method|modprop|modtype|module|nonfix|object|of|op|or|orelse|overload|par|postfix|praxi|prefix|prfn|prfun|prval|rec|scase|sif|stacst|staif|staload|stavar|sta|struct|symelim|symintr|then|try|union|val(\+|-)?|var|when|where|while|withprop|withtype|withviewtype|withview|with)\b</string>
 			<key>name</key>
 			<string>keyword</string>
 		</dict>
 		<key>keywords_types</key>
 		<dict>
 			<key>match</key>
-			<string>(\#|\$)(\w+)|\b(abstype|abst@ype|abst0pe|absvtype|absvt@ype|absvt0pe|absviewtype|absviewt@ype|absviewt0pe|absview|absprop|datatype|datavtype|dataviewtype|dataview|dataprop|datasort|sortdef|propdef|viewdef|viewtypedef|vtypedef|stadef|typedef|)\b</string>
+			<string>(\#|\$)(\w+)|\b(abstype|abst@ype|abst0pe|absvtype|absvt@ype|absvt0pe|absviewtype|absviewt@ype|absviewt0pe|absview|absprop|datatype|datavtype|dataviewtype|dataview|dataprop|datasort|sortdef|propdef|viewdef|viewtypedef|vtypedef|stadef|typedef)\b</string>
 			<key>name</key>
 			<string>keyword</string>
 		</dict>
@@ -194,20 +305,20 @@
 		<key>quantifier_curly</key>
 		<dict>
 			<key>begin</key>
-			<string>({)</string>
+			<string>\{(?=[\S])</string>
 			<key>end</key>
-			<string>(})</string>
+			<string>\}</string>
 			<key>name</key>
-			<string>support.type</string>
+			<string>support.type.quantifier.universal</string>
 		</dict>
 		<key>quantifier_square</key>
 		<dict>
 			<key>begin</key>
-			<string>(\[)</string>
+			<string>\[(?=[\S])</string>
 			<key>end</key>
-			<string>(\])</string>
+			<string>\]</string>
 			<key>name</key>
-			<string>support.type</string>
+			<string>support.type.quantifier.existential</string>
 		</dict>
 		<key>records</key>
 		<dict>

@@ -5,27 +5,35 @@ fileTypes: [dats, sats, hats]
 uuid: c3b7ee53-6117-4cdf-80ea-d0572e54aed7
 
 patterns:
+- include: '#quantifier_curly'
+
+- include: '#quantifier_square'
+
 - include: '#block'
 
 - include: '#comment_rest'
 
 - include: '#comment_line'
 
-- include: '#comment_block'
+- include: '#comment_block_c'
+
+- include: '#comment_block_sml'
 
 - include: '#embed'
 
 - include: '#operators'
 
-- include: '#quantifier_curly'
-
-- include: '#quantifier_square'
-
 - include: '#quantifier_arrow'
+
+- include: '#definition_function'
+
+- include: '#definition_type'
 
 - include: '#keywords'
 
 - include: '#keywords_types'
+
+- include: '#false_true'
 
 - include: '#string'
 
@@ -37,14 +45,34 @@ patterns:
 
 - include: '#number'
 
+- include: '#identifier'
 
 repository:
-  comment_block:
+
+  block:
+    name: meta.block
+    begin: (?<=where|=|^|then|else|\$rec|\$rec_t|\$rec_vt)(?:\s*)\{
+    end: \}
+    patterns:
+    - include: $self
+    applyEndPatternLast: 1
+
+  char:
+    name: string.quoted.double
+    match: (')([^\\]{0,1}|\\(\\|[abefpnrtv'"?]|[0-3]\d{0,2}|[4-7]\d?|x[a-fA-F0-9]{0,2}|u[a-fA-F0-9]{0,4}|U[a-fA-F0-9]{0,8}))(')
+
+  comment_block_c:
+    name: comment.block
+    begin: /\*
+    end: \*/
+    applyEndPatternLast: 1
+
+  comment_block_sml:
     name: comment.block
     begin: \(\*
     end: \*\)
     patterns:
-    - include: '#comment_block'
+    - include: '#comment_block_sml'
     applyEndPatternLast: 1
 
   comment_line:
@@ -52,36 +80,59 @@ repository:
     match: //.*$
 
   comment_rest:
-    name: comment
+    name: comment.block
     begin: ////
     end: .\z
     patterns:
     - match: .*
     applyEndPatternLast: 1
 
-  records:
-    # name: keyword.operator
-    begin: ('|@)({)
-    end: (})
+  definition_function:
+    name: meta.function-definition
+    begin: \b(?:castfn|fn|fun|implement|implmnt|infixl|infixr|infix|overload|postfix|praxi|prfn|prfun|primplement|primplmnt|var)\b
+    end: \b[a-zA-Z][a-zA-Z0-9_']*\b
     patterns:
     - include: $self
-    # applyEndPatternLast: 1
+    beginCaptures:
+      '0': {name: keyword}
+    endCaptures:
+      '0': {name: entity.name.function}
 
-  tuples:
-    # name: keyword.operator
-    begin: ('|@)\(
-    end: (\))
+  definition_type:
+    name: meta.type-definition
+    begin: \b(abstype|abst@ype|abst0pe|absvtype|absvt@ype|absvt0pe|absviewtype|absviewt@ype|absviewt0pe|absview|absprop|datatype|datavtype|dataviewtype|dataview|dataprop|datasort|sortdef|propdef|viewdef|viewtypedef|vtypedef|stadef|typedef)\b
+    end: \b[a-zA-Z][a-zA-Z0-9_']*\b
     patterns:
     - include: $self
-    # applyEndPatternLast: 1
+    beginCaptures:
+      '0': {name: keyword}
+    endCaptures:
+      '0': {name: entity.name.type storage.type}
+
+  embed:
+    name: meta
+    begin: (%{)
+    end: (%})
+
+  false_true:
+    name: constant.language.boolean
+    match: \b(?:false|true)\b
+
+  identifier:
+    name: identifier
+    match: \b[a-zA-Z][a-zA-Z0-9_']*\b
 
   keywords:
     name: keyword
-    match: (\#|\$)(\w+)|\b(castfn|and|andalso|assume|as|begin|break|case(\+|-)?|class|continue|dynload|dyn|else|end|exception|extern|fix|fn|for|fun|if|implement|implmnt|primplement|primplmnt|infixl|infixr|infix|in|lam|let|llam|local|macdef|macrodef|method|modprop|modtype|module|nonfix|object|of|op|or|orelse|overload|par|postfix|praxi|prefix|prfn|prfun|prval|rec|sif|staif|staload|stavar|sta|struct|symelim|symintr|then|try|union|val(\+|-)?|var|when|where|while|withprop|withtype|withviewtype|withview|with)\b
+    match: (\#|\$)(\w+)|\b(castfn|and|andalso|assume|as|begin|break|case(\+|-)?|class|continue|dynload|dyn|else|end|exception|extern|fix|fn|for|fun|if|implement|implmnt|primplement|primplmnt|infixl|infixr|infix|in|lam|let|llam|local|macdef|macrodef|method|modprop|modtype|module|nonfix|object|of|op|or|orelse|overload|par|postfix|praxi|prefix|prfn|prfun|prval|rec|scase|sif|stacst|staif|staload|stavar|sta|struct|symelim|symintr|then|try|union|val(\+|-)?|var|when|where|while|withprop|withtype|withviewtype|withview|with)\b
 
   keywords_types:
     name: keyword
-    match:  (\#|\$)(\w+)|\b(abstype|abst@ype|abst0pe|absvtype|absvt@ype|absvt0pe|absviewtype|absviewt@ype|absviewt0pe|absview|absprop|datatype|datavtype|dataviewtype|dataview|dataprop|datasort|sortdef|propdef|viewdef|viewtypedef|vtypedef|stadef|typedef|)\b
+    match:  (\#|\$)(\w+)|\b(abstype|abst@ype|abst0pe|absvtype|absvt@ype|absvt0pe|absviewtype|absviewt@ype|absviewt0pe|absview|absprop|datatype|datavtype|dataviewtype|dataview|dataprop|datasort|sortdef|propdef|viewdef|viewtypedef|vtypedef|stadef|typedef)\b
+
+  number:
+    name: constant.numeric
+    match: \b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|~)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\b
 
   operators:
     name: keyword.operator
@@ -93,18 +144,22 @@ repository:
     end: '>'
 
   quantifier_curly:
-    name: support.type
-    begin: ({)
-    end: (})
+    name: support.type.quantifier.universal
+    begin: \{(?=[\S])
+    end: \}
 
   quantifier_square:
-    name: support.type
-    begin: (\[)
-    end: (\])
+    name: support.type.quantifier.existential
+    begin: \[(?=[\S])
+    end: \]
 
-  number:
-    name: constant.numeric
-    match: \b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|~)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\b
+  records:
+    # name: keyword.operator
+    begin: ('|@)({)
+    end: (})
+    patterns:
+    - include: $self
+    # applyEndPatternLast: 1
 
   string:
     name: string.quoted.double
@@ -117,14 +172,13 @@ repository:
     name: constant.character.escape
     match: \\(\\|[abefnprtv'"?]|[0-3]\d{0,2}|[4-7]\d?|x[a-fA-F0-9]{0,2}|u[a-fA-F0-9]{0,4}|U[a-fA-F0-9]{0,8})
 
-  char:
-    name: string.quoted.double
-    match: (')([^\\]{0,1}|\\(\\|[abefpnrtv'"?]|[0-3]\d{0,2}|[4-7]\d?|x[a-fA-F0-9]{0,2}|u[a-fA-F0-9]{0,4}|U[a-fA-F0-9]{0,8}))(')
-    
-  embed:
-    name: meta
-    begin: (%{)
-    end: (%})
+  tuples:
+    # name: keyword.operator
+    begin: ('|@)\(
+    end: (\))
+    patterns:
+    - include: $self
+    # applyEndPatternLast: 1
 
   # where:
   #   begin: (?<=where)(?:(\s|\n|\r)*){
@@ -132,10 +186,3 @@ repository:
   #   patterns:
   #   - include: $self
   #   applyEndPatternLast: 1
-
-  block:
-    begin: (?<=where|=|^|then|else|\$rec|\$rec_t|\$rec_vt)(?:\s*){
-    end: '}'
-    patterns:
-    - include: $self
-    applyEndPatternLast: 1

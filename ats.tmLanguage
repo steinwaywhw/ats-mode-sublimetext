@@ -70,6 +70,10 @@
 		</dict>
 		<dict>
 			<key>include</key>
+			<string>#false_true</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#string</string>
 		</dict>
 		<dict>
@@ -244,6 +248,13 @@
 			<string>(%})</string>
 			<key>name</key>
 			<string>meta</string>
+		</dict>
+		<key>false_true</key>
+		<dict>
+			<key>match</key>
+			<string>\b(?:false|true)\b</string>
+			<key>name</key>
+			<string>constant.language.boolean</string>
 		</dict>
 		<key>identifier</key>
 		<dict>

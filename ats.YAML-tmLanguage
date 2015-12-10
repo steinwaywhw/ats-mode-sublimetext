@@ -33,6 +33,8 @@ patterns:
 
 - include: '#keywords_types'
 
+- include: '#false_true'
+
 - include: '#string'
 
 - include: '#char'
@@ -110,6 +112,10 @@ repository:
     name: meta
     begin: (%{)
     end: (%})
+
+  false_true:
+    name: constant.language.boolean
+    match: \b(?:false|true)\b
 
   identifier:
     name: identifier

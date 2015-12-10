@@ -14,6 +14,14 @@
 	<array>
 		<dict>
 			<key>include</key>
+			<string>#quantifier_curly</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#quantifier_square</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#block</string>
 		</dict>
 		<dict>
@@ -39,14 +47,6 @@
 		<dict>
 			<key>include</key>
 			<string>#operators</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#quantifier_curly</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#quantifier_square</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -104,9 +104,11 @@
 			<key>applyEndPatternLast</key>
 			<integer>1</integer>
 			<key>begin</key>
-			<string>(?&lt;=where|=|^|then|else|\$rec|\$rec_t|\$rec_vt)(?:\s*){</string>
+			<string>(?&lt;=where|=|^|then|else|\$rec|\$rec_t|\$rec_vt)(?:\s*)\{</string>
 			<key>end</key>
-			<string>}</string>
+			<string>\}</string>
+			<key>name</key>
+			<string>meta.block</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -303,20 +305,20 @@
 		<key>quantifier_curly</key>
 		<dict>
 			<key>begin</key>
-			<string>({)</string>
+			<string>\{(?=[\S])</string>
 			<key>end</key>
-			<string>(})</string>
+			<string>\}</string>
 			<key>name</key>
-			<string>support.type</string>
+			<string>support.type.quantifier.universal</string>
 		</dict>
 		<key>quantifier_square</key>
 		<dict>
 			<key>begin</key>
-			<string>(\[)</string>
+			<string>\[(?=[\S])</string>
 			<key>end</key>
-			<string>(\])</string>
+			<string>\]</string>
 			<key>name</key>
-			<string>support.type</string>
+			<string>support.type.quantifier.existential</string>
 		</dict>
 		<key>records</key>
 		<dict>

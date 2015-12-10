@@ -5,6 +5,10 @@ fileTypes: [dats, sats, hats]
 uuid: c3b7ee53-6117-4cdf-80ea-d0572e54aed7
 
 patterns:
+- include: '#quantifier_curly'
+
+- include: '#quantifier_square'
+
 - include: '#block'
 
 - include: '#comment_rest'
@@ -18,10 +22,6 @@ patterns:
 - include: '#embed'
 
 - include: '#operators'
-
-- include: '#quantifier_curly'
-
-- include: '#quantifier_square'
 
 - include: '#quantifier_arrow'
 
@@ -50,8 +50,9 @@ patterns:
 repository:
 
   block:
-    begin: (?<=where|=|^|then|else|\$rec|\$rec_t|\$rec_vt)(?:\s*){
-    end: '}'
+    name: meta.block
+    begin: (?<=where|=|^|then|else|\$rec|\$rec_t|\$rec_vt)(?:\s*)\{
+    end: \}
     patterns:
     - include: $self
     applyEndPatternLast: 1
@@ -143,14 +144,14 @@ repository:
     end: '>'
 
   quantifier_curly:
-    name: support.type
-    begin: ({)
-    end: (})
+    name: support.type.quantifier.universal
+    begin: \{(?=[\S])
+    end: \}
 
   quantifier_square:
-    name: support.type
-    begin: (\[)
-    end: (\])
+    name: support.type.quantifier.existential
+    begin: \[(?=[\S])
+    end: \]
 
   records:
     # name: keyword.operator

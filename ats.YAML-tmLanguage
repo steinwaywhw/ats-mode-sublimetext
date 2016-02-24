@@ -100,7 +100,7 @@ repository:
 
   definition_type:
     name: meta.type-definition
-    begin: \b(abstype|abst@ype|abst0pe|absvtype|absvt@ype|absvt0pe|absviewtype|absviewt@ype|absviewt0pe|absview|absprop|datatype|datavtype|dataviewtype|dataview|dataprop|datasort|sortdef|propdef|viewdef|viewtypedef|vtypedef|stadef|typedef)\b
+    begin: \b(abstype|abst@ype|abst0pe|absvtype|absvt@ype|absvt0pe|absviewtype|absviewt@ype|absviewt0pe|absview|absprop|datatype|datavtype|dataviewtype|dataview|dataprop|datasort|sortdef|propdef|viewdef|viewtypedef|vtypedef|stadef|stacst|typedef)\b
     end: \b[a-zA-Z][a-zA-Z0-9_']*\b
     patterns:
     - include: $self

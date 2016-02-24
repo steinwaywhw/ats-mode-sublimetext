@@ -213,7 +213,7 @@
 		<key>definition_type</key>
 		<dict>
 			<key>begin</key>
-			<string>\b(abstype|abst@ype|abst0pe|absvtype|absvt@ype|absvt0pe|absviewtype|absviewt@ype|absviewt0pe|absview|absprop|datatype|datavtype|dataviewtype|dataview|dataprop|datasort|sortdef|propdef|viewdef|viewtypedef|vtypedef|stadef|typedef)\b</string>
+			<string>\b(abstype|abst@ype|abst0pe|absvtype|absvt@ype|absvt0pe|absviewtype|absviewt@ype|absviewt0pe|absview|absprop|datatype|datavtype|dataviewtype|dataview|dataprop|datasort|sortdef|propdef|viewdef|viewtypedef|vtypedef|stadef|stacst|typedef)\b</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>0</key>
